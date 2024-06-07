@@ -1,22 +1,20 @@
 public class Main {
-    public static String reverseString(String str) {
-        if (str == null || str.isEmpty()) {
-            return str;
+   @EventHandler
+    public void onRightClickAnything(PlayerInteractEvent event) {
+       System.out.println("Is the event null? " + event);
+
+        try {
+            if(event.getClickedBlock() != null) {
+                if(event.getClickedBlock().getType() == CompMaterial.GRASS_BLOCK.getMaterial()) {
+                    handleClickingGrass(event.getClickedBlock(), event.getPlayer());
+                }
+            }
+        } catch (NullPointerException ex) {
+            System.out.println("This is not a grass block");
         }
 
-        StringBuilder reversed = new StringBuilder();
-        for (int i = str.length() - 1; i >= 0; i--) {
-            reversed.append(str.charAt(i));
-        }
 
-        return reversed.toString();
-    }
-
-    public static void main(String[] args) {
-        String original = "Hello, World!";
-        String reversed = reverseString(original);
-        System.out.println("Original: " + original);
-        System.out.println("Reversed: " + reversed);
-    }
+       System.out.println("...finished!");
+   }
 
 }
